@@ -234,6 +234,7 @@ export default function AccountsPage() {
             onAddAccount={() => { setEditingAccount(null); setDialogOpen(true) }}
             onConnectBank={() => setConnectorSelectOpen(true)}
             onOpenCollections={() => navigate('/collections')}
+            testId="accounts-page-header"
           />
         }
       />
@@ -264,7 +265,11 @@ export default function AccountsPage() {
                   const dueClass = dueIn != null && dueIn <= 3 ? 'text-amber-600' : 'text-muted-foreground'
                   const accountMask = formatAccountMask(acc)
                   return (
-                    <div key={acc.id} className="group flex items-center px-5 py-3 hover:bg-muted/50 transition-colors">
+                    <div
+                      key={acc.id}
+                      className="group flex items-center px-5 py-3 hover:bg-muted/50 transition-colors"
+                      data-testid={`account-row-${acc.id}`}
+                    >
                       <Link to={`/accounts/${acc.id}`} className="flex items-center gap-3 flex-1 min-w-0">
                         <AccountIcon account={acc} />
                         <div className="min-w-0 flex-1">

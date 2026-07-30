@@ -1162,6 +1162,7 @@ export default function TransactionsPage() {
             onAdd={canWrite ? () => { setEditingTx(null); setDialogOpen(true) } : undefined}
             onDuplicate={duplicableTx ? () => handleDuplicateTransaction(duplicableTx) : undefined}
             onTransfer={canWrite ? () => setTransferDialogOpen(true) : undefined}
+            testId="transactions-page-header"
           />
         }
       />
@@ -1447,6 +1448,7 @@ export default function TransactionsPage() {
           so the bar visually sits over the transactions list, not the
           full viewport. */}
       <div
+        data-testid="transactions-bulk-actions"
         className={`fixed bottom-0 left-0 right-0 lg:left-60 z-50 transition-transform duration-200 ease-out ${selectedIds.size > 0 ? 'translate-y-0' : 'translate-y-full'}`}
       >
         <div className="mx-auto max-w-7xl px-3 md:px-6 pb-4 md:pb-6">

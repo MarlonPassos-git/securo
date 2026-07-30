@@ -357,7 +357,12 @@ export default function RulesPage() {
                   <RefreshCw size={12} />
                   <span className="hidden sm:inline">{t('rules.resetAndReapplyAll', 'Reset and reapply')}</span>
                 </Button>
-                <Button size="sm" className="gap-1.5 h-8" onClick={openCreate}>
+                <Button
+                  size="sm"
+                  className="gap-1.5 h-8"
+                  data-testid="rules-add-button"
+                  onClick={openCreate}
+                >
                   <Plus size={13} /> <span className="hidden sm:inline">{t('rules.add')}</span>
                 </Button>
               </div>
