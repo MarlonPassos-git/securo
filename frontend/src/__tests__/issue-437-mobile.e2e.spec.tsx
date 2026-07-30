@@ -43,6 +43,7 @@ test('transaction header keeps month and actions on one line', async () => {
   const screen = await renderRoute(TRANSACTIONS_ROUTE, 'Transações')
   const header = screen.getByTestId('transactions-page-header')
 
+  await expect.element(header.getByText('07/2026', { exact: true })).toBeVisible()
   await expect.element(header.getByRole('button', { name: /Adicionar/ })).toBeVisible()
   await expect(header).toMatchScreenshot('transaction-header')
 })
@@ -77,17 +78,22 @@ test('account page keeps Add Account as the mobile primary action', async () => 
 
   await expect.element(header.getByRole('button', { name: 'Adicionar Conta' })).toBeVisible()
   await expect(header).toMatchScreenshot('account-header-actions')
+  await header.getByRole('button', { name: 'Mais' }).click()
+
+  const secondaryMenu = page.getByRole('menu')
+  await expect.element(secondaryMenu.getByText('Coleções')).toBeVisible()
+  await expect.element(secondaryMenu.getByText('Conectar Banco')).toBeVisible()
 })
 
-test('manual account actions are reachable from the touch menu', async () => {
+test('manual account actions follow the balance and remain reachable', async () => {
   const screen = await renderRoute('/accounts', 'Contas')
   const accountRow = screen.getByTestId('account-row-manual-primary')
+  await expect(accountRow).toMatchScreenshot('manual-account-actions')
   await accountRow.getByRole('button', { name: 'Mais' }).click()
 
   const accountMenu = page.getByRole('menu')
   await expect.element(accountMenu.getByText('Editar')).toBeVisible()
   await expect.element(accountMenu.getByText('Excluir')).toBeVisible()
-  await expect(accountMenu).toMatchScreenshot('manual-account-actions')
 })
 
 test('rule conditions use two-line mobile fields', async () => {
